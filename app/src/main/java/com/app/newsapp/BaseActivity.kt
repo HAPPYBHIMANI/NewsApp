@@ -55,6 +55,7 @@ abstract class BaseActivity<VM : ViewModel, B : ViewBinding, R : BaseRepository>
     open fun showSnackBar(message: String, view: View) {
         val snackbar = Snackbar.make(view, message, Snackbar.LENGTH_LONG)
         snackbar.show()
+
     }
 
     open fun showToast(message: String) {
