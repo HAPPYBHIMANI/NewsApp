@@ -1,14 +1,14 @@
-package com.app.newsapp
+package com.app.newsapp.fragments
 
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
-import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewbinding.BuildConfig
@@ -18,48 +18,53 @@ import com.app.newsapp.network.RemoteDataSource
 import com.app.newsapp.repository.BaseRepository
 import com.app.newsapp.utils.PreferenceUtils
 import com.google.android.material.snackbar.Snackbar
-import java.util.regex.Matcher
 import java.util.regex.Pattern
 
-abstract class BaseActivity<VM : ViewModel, B : ViewBinding, R : BaseRepository> :
-    AppCompatActivity() {
+abstract class BaseFragment<VM : ViewModel, B : ViewBinding, R : BaseRepository> : Fragment() {
 
-    protected lateinit var preferenceUtils: PreferenceUtils
-
+    protected lateinit var userPreferences: PreferenceUtils
     protected lateinit var binding: B
     protected lateinit var viewModel: VM
     protected val remoteDataSource = RemoteDataSource()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    companion object {
+        var baseFragment: Context? = null
+    }
 
-        preferenceUtils = PreferenceUtils(this)
-        binding = getActivityBinding(layoutInflater)
-        val factory = ViewModelFactory(getActivityRepository())
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        userPreferences = PreferenceUtils(requireContext())
+        binding = getFragmentBinding(inflater, container)
+        val factory = ViewModelFactory(getFragmentRepository())
         viewModel = ViewModelProvider(this, factory).get(getViewModel())
-//        return binding.root
+        baseFragment = requireContext()
+        return binding.root
     }
 
     abstract fun getViewModel(): Class<VM>
 
-    abstract fun getActivityBinding(inflater: LayoutInflater): B
+    abstract fun getFragmentBinding(inflater: LayoutInflater, container: ViewGroup?): B
 
-    abstract fun getActivityRepository(): R
+    abstract fun getFragmentRepository(): R
 
-    open fun logError(tag: String, message: String) {
-        if (BuildConfig.DEBUG) {
-            Log.e(tag, message)
-        }
-    }
+    /**
+     * to show error messages only in Snackbar
+     */
+    /*  open fun showSnackBar(msg: String?) {
+          if (msg == null) return
+          Snackbar.make(findViewById<View>(android.R.id.content), msg, Snackbar.LENGTH_LONG).show()
+      }*/
 
     open fun showSnackBar(message: String, view: View) {
         val snackbar = Snackbar.make(view, message, Snackbar.LENGTH_LONG)
         snackbar.show()
-
     }
 
     open fun showToast(message: String) {
-        Toast.makeText(this, "" + message, Toast.LENGTH_SHORT).show()
+        Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show()
     }
 
     /**
@@ -76,23 +81,19 @@ abstract class BaseActivity<VM : ViewModel, B : ViewBinding, R : BaseRepository>
         return matcher.matches()
     }
 
-    open fun isValidPassword(password: String?): Boolean {
-        val pattern: Pattern
-        val matcher: Matcher
-        val PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=\\S+$).{4,}$"
-        pattern = Pattern.compile(PASSWORD_PATTERN)
-        matcher = pattern.matcher(password)
-        return matcher.matches()
-    }
-
-    open fun isMobileValid(phone: String): Boolean {
-        return Patterns.PHONE.matcher(phone).matches()
-    }
-
     open fun hideKeyBoard(view: View?) {
         if (view != null) {
-            val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            val imm = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             imm.hideSoftInputFromWindow(view.windowToken, 0)
         }
     }
+
+    open fun logError(tag: String, message: String) {
+        if (BuildConfig.DEBUG) {
+            Log.e(tag, message)
+        }
+    }
+
+
+
 }

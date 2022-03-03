@@ -3,8 +3,26 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Happy/Demo project/NewsApp/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Happy/Demo project/NewsApp/app/src/main/res/drawable-v24/bg_rounded.xml" value="0.2169230769230769" />
+        <entry key="..\:/Happy/Demo project/NewsApp/app/src/main/res/drawable-v24/white_bg.xml" value="0.2169230769230769" />
+        <entry key="..\:/Happy/Demo project/NewsApp/app/src/main/res/drawable/bg_gradient.xml" value="0.2203125" />
+        <entry key="..\:/Happy/Demo project/NewsApp/app/src/main/res/drawable/bg_rounded_dark.xml" value="0.2203125" />
+        <entry key="..\:/Happy/Demo project/NewsApp/app/src/main/res/drawable/custom_bookmarked.xml" value="0.21388888888888888" />
+        <entry key="..\:/Happy/Demo project/NewsApp/app/src/main/res/drawable/ic_bookmarked.xml" value="0.21388888888888888" />
+        <entry key="..\:/Happy/Demo project/NewsApp/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
+        <entry key="..\:/Happy/Demo project/NewsApp/app/src/main/res/drawable/ic_news.xml" value="0.2169230769230769" />
+        <entry key="..\:/Happy/Demo project/NewsApp/app/src/main/res/drawable/ic_unbookmarked.xml" value="0.21388888888888888" />
+        <entry key="..\:/Happy/Demo project/NewsApp/app/src/main/res/layout/activity_home.xml" value="0.10204081632653061" />
+        <entry key="..\:/Happy/Demo project/NewsApp/app/src/main/res/layout/activity_login.xml" value="0.16" />
+        <entry key="..\:/Happy/Demo project/NewsApp/app/src/main/res/layout/activity_main.xml" value="0.18" />
+        <entry key="..\:/Happy/Demo project/NewsApp/app/src/main/res/layout/activity_splash.xml" value="0.20416666666666666" />
         <entry key="..\:/Happy/Demo project/NewsApp/app/src/main/res/layout/adapter_movie.xml" value="0.20416666666666666" />
+        <entry key="..\:/Happy/Demo project/NewsApp/app/src/main/res/layout/adapter_news.xml" value="0.15" />
+        <entry key="..\:/Happy/Demo project/NewsApp/app/src/main/res/layout/fragment_bookmarked.xml" value="0.20416666666666666" />
+        <entry key="..\:/Happy/Demo project/NewsApp/app/src/main/res/layout/fragment_home.xml" value="0.20416666666666666" />
+        <entry key="..\:/Happy/Demo project/NewsApp/app/src/main/res/layout/fragment_tab.xml" value="0.20416666666666666" />
+        <entry key="..\:/Happy/Demo project/NewsApp/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.1328125" />
+        <entry key="..\:/Happy/Demo project/NewsApp/app/src/main/res/menu/menu.xml" value="0.20416666666666666" />
       </map>
     </option>
   </component>

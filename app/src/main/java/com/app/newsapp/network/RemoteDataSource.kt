@@ -2,13 +2,14 @@ package com.app.newsapp.network
 
 import com.app.newsapp.BuildConfig
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 class RemoteDataSource {
     companion object {
-        private const val BASE_URL = ""
+        private const val BASE_URL = "https://newsapi.org"
 
         var termsUrl: String = BASE_URL + "term"
         var privacyUrl: String = BASE_URL + "privacy"
@@ -50,9 +51,9 @@ class RemoteDataSource {
                         }.build())
                     }.also { client ->
                         if (BuildConfig.DEBUG) {
-//                            val logging = HttpLoggingInterceptor()
-//                            logging.setLevel(HttpLoggingInterceptor.Level.BODY)
-//                            client.addInterceptor(logging)
+                            val logging = HttpLoggingInterceptor()
+                            logging.setLevel(HttpLoggingInterceptor.Level.BODY)
+                            client.addInterceptor(logging)
                         }
                     }.build()
             )
