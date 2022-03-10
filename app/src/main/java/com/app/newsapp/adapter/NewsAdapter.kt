@@ -13,11 +13,12 @@ class NewsAdapter(
     val context: Context,
     val articlesList: ArrayList<Articles>,
     val isLoadingAdded: Boolean? = false,
-    var isBookmarked: String? = null
+    var isBookmarked: String? = null,
+    var author: String? = null
 ) :
 
     RecyclerView.Adapter<NewsAdapter.ViewHolder>() {
-    var onItemClick: ((Int) -> Unit)? = null
+    var onItemClick: ((Int, String, String) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -44,17 +45,29 @@ class NewsAdapter(
                 .load(articles.urlToImage)
                 .into(recyclerRowBinding.imageview)
 
+            author = articles.author
+
+            recyclerRowBinding.checkboxBookmarked.setOnCheckedChangeListener { buttonView, isChecked ->
+                if (isChecked) {
+                    isBookmarked = "true"
+//                    onItemClick?.invoke(adapterPosition, isBookma
+                    //                    rked.toString())
+                } else {
+                    isBookmarked = "false"
+//                    onItemClick?.invoke(adapterPosition, isBookmarked.toString())
+                }
+            }
 
         }
 
         init {
             recyclerRowBinding.root.setOnClickListener {
-                onItemClick?.invoke(adapterPosition)
+                if (author != null) {
+                    onItemClick?.invoke(adapterPosition, isBookmarked!!, author!!)
+                }
             }
 
-            recyclerRowBinding.imageview.setOnClickListener {
-                onItemClick?.invoke(adapterPosition)
-            }
+
         }
     }
 }

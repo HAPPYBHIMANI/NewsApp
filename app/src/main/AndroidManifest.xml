@@ -26,6 +26,10 @@
             android:exported="true" />
 
         <activity
+            android:name=".DetailsActivtiy"
+            android:exported="true" />
+
+        <activity
             android:name=".SplashActivity"
             android:exported="true"
             android:windowSoftInputMode="adjustPan">
